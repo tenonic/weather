@@ -1,16 +1,19 @@
 # Weatherapp
 
-latest ng cli must be present (1.0.0-beta.32.3)
 
-npm install
+### Set up:
 
-in first terminal instance run build watch `ng build --watch`
+1. latest ng cli must be present (1.0.0-beta.32.3)
 
-in second terminal instance run `npm run nodemon`
+2. npm install
 
-navigate to `http://localhost:3002/`
+3. in first terminal instance run build watch `ng build --watch`
 
-please don't abuse the api calls, we don't want the goverment closing this free API
+4. in second terminal instance run `npm run nodemon`
+
+5. navigate to `http://localhost:3002/`
+
+## Please don't abuse the api calls, we don't want the goverment closing this free API
 
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0-beta.32.3.
