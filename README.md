@@ -1,5 +1,18 @@
 # Weatherapp
 
+ng cli must be present
+
+npm install
+
+in first terminal instance run build watch `ng build --watch`
+
+in second terminal instance run `npm run nodemon`
+
+navigate to `http://localhost:3002/`
+
+please don't abuse the api calls, we don't want the goverment closing this free API
+
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0-beta.32.3.
 
 ## Development server
