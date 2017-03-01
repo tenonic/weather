@@ -1,6 +1,6 @@
 # Weatherapp
 
-ng cli must be present
+latest ng cli must be present (1.0.0-beta.32.3)
 
 npm install
 
