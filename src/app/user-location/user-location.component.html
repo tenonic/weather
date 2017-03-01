@@ -1,0 +1,10 @@
+
+  <label for="city">Location:</label>
+  <input type="text" [(ngModel)]='query' (keyup)='filter()'>
+  <div class="suggestions" *ngIf="filteredList.length > 0">
+    <ul *ngFor="let item of filteredList">
+      <li>
+        <a (click)="select(item)">{{item.nameEn}}</a>
+      </li>
+    </ul>
+  </div>

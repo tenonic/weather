@@ -1,5 +1,5 @@
 import { DataService } from './../services/data.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 
 @Component({
@@ -9,12 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CurrentTemperatureComponent implements OnInit {
 
+  @Input() weatherData: any;
+
   constructor(private data: DataService) { }
 
   ngOnInit() {
-   this.data.get('test').subscribe(data => console.log(data));
-  }
 
-  //blah
+  }
 
 }

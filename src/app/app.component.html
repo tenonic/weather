@@ -1,5 +1,11 @@
-<h1>
-  {{title}}
-</h1>
-<app-current-temperature>
+WeatherCats
+<app-user-location
+  (selectCityCode)='selectCityCode($event)'
+>
+</app-user-location>
+
+<app-current-temperature
+  *ngIf = 'weatherData'
+  [weatherData] = 'weatherData'
+>
 </app-current-temperature>
