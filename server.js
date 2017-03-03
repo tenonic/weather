@@ -35,7 +35,7 @@ app.set('port', port);
  */
 const server = http.createServer(app);
 
-reload(server, app);
+//reload(server, app);
 
 
 /**
