@@ -21,7 +21,7 @@ router.get('/weathercast/:cityId',  function (req, res) {
         // res.send(json);
 
         parseString(xml, function (err, result) {
-            console.log(result);
+            //console.log(result);
             //res.send(result.siteData.currentConditions[0].temperature[0]._);
             res.send(result.siteData);
             

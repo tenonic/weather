@@ -3,16 +3,22 @@
   "version": "0.0.0",
   "license": "MIT",
   "angular-cli": {},
+  "engines": {
+    "node": "6.9.1",
+    "npm": "3.10.8"
+  },
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node server.js",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "nodemon": "nodemon server.js"
+    "nodemon": "nodemon server.js",
+    "postinstall": "ng build --aot -prod"
   },
   "private": true,
   "dependencies": {
+    "@angular/cli": "1.0.0-beta.32.3",
     "@angular/common": "^2.4.0",
     "@angular/compiler": "^2.4.0",
     "@angular/core": "^2.4.0",
@@ -30,7 +36,6 @@
     "zone.js": "^0.7.6"
   },
   "devDependencies": {
-    "@angular/cli": "1.0.0-beta.32.3",
     "@angular/compiler-cli": "^2.4.0",
     "@types/jasmine": "2.5.38",
     "@types/node": "~6.0.60",
