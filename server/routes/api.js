@@ -13,17 +13,20 @@ router.get('/test', (req, res) => {
     res.send({ test: 'works' });
 });
 
+var conString = process.env.DATABASE_URL
+    || "postgres://nkbzizwzkuiokp:472a016ade0325eebbb97037b2f7ca4ec4285eb65e04bd919f8350c18adb36b2@ec2-54-243-187-133.compute-1.amazonaws.com:5432/dhcjqujfnq6mr?ssl=true";
+
 router.get('/Barrie', (req, res) => {
-    pg.connect(process.env.DATABASE_URL, function (err, client, done) {
+
+    pg.connect(conString, function (err, client, done) {
         client.query('SELECT * FROM city_weather', function (err, result) {
             done();
             if (err)
             { console.error(err); res.send("Error " + err); }
-            else
-            { 
+            else {
                 //console.log(result.rows) 
                 res.send({ results: result.rows });
-             }
+            }
         });
     });
     //res.send({ test: 'works' });
