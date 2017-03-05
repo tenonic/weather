@@ -15,7 +15,7 @@ export class UserLocationComponent implements OnInit {
   private cities = cities;
   public filteredList = [];
   // public elementRef;
-   @Output() selectCityCode = new EventEmitter();
+   @Output() selectLocation = new EventEmitter();
 
 
   constructor(myElement: ElementRef) {
@@ -38,7 +38,8 @@ export class UserLocationComponent implements OnInit {
     this.query = item.nameEn;
     this.filteredList = [];
     console.log(item['-code']);
-    this.selectCityCode.emit(item['-code']);
+
+    this.selectLocation.emit({cityCode : item['-code'], provinceCode: item['provinceCode'] });
   }
 
 }

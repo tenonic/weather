@@ -18,6 +18,8 @@ var conString = process.env.DATABASE_URL
 
 router.get('/Barrie', (req, res) => {
 
+    console.log('barrie get');
+
     pg.connect(conString, function (err, client, done) {
         client.query('SELECT * FROM city_weather', function (err, result) {
             done();
@@ -34,7 +36,7 @@ router.get('/Barrie', (req, res) => {
 
 
 router.get('/weathercast/:cityId', function (req, res) {
-    console.log('weathercast get route');
+    console.log('weathercast city route');
     request("http://dd.weatheroffice.ec.gc.ca/citypage_weather/xml/ON/" + req.params.cityId + "_e.xml", function (error, response, body) {
         var xml = body;
 
@@ -44,6 +46,19 @@ router.get('/weathercast/:cityId', function (req, res) {
         parseString(xml, function (err, result) {
             //console.log(result);
             //res.send(result.siteData.currentConditions[0].temperature[0]._);
+            res.send(result.siteData);
+
+        });
+    });
+});
+
+router.get('/weathercast/:provinceCode/:cityCode', function (req, res) {
+    console.log('weathercast province / city route');
+    request("http://dd.weatheroffice.ec.gc.ca/citypage_weather/xml/" + req.params.provinceCode + "/" + req.params.cityCode + "_e.xml", function (error, response, body) {
+        var xml = body;
+
+        parseString(xml, function (err, result) {
+            console.log(result);
             res.send(result.siteData);
 
         });

@@ -11,6 +11,7 @@ export class AppComponent implements OnInit {
   private userLocation: string;
   private cities = cities;
   private selectedCityCode: string;
+  private selectedProvinceCode: string;
   private weatherData: any;
 
   constructor(private data: DataService) { }
@@ -19,14 +20,15 @@ export class AppComponent implements OnInit {
     console.log(cities);
   }
 
-  selectCityCode(cityCode) {
-    this.selectedCityCode = cityCode;
-    console.log(cityCode);
+  selectLocation(location) {
+    this.selectedCityCode = location.cityCode;
+    this.selectedProvinceCode = location.provinceCode;
+    console.log(location);
     this.getWeather();
   }
 
   getWeather() {
-    this.data.get('weathercast/' + this.selectedCityCode).subscribe(data => {
+    this.data.get('weathercast/' + this.selectedProvinceCode + '/' + this.selectedCityCode).subscribe(data => {
       console.log(data);
       this.weatherData = data;
     });
