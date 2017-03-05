@@ -18,7 +18,7 @@ router.get('/Barrie', (req, res) => {
         client.query('SELECT * FROM city_weather', function (err, result) {
             done();
             if (err)
-            { console.error(err); response.send("Error " + err); }
+            { console.error(err); res.send("Error " + err); }
             else
             { 
                 //console.log(result.rows) 
