@@ -4,17 +4,28 @@ var request = require("request");
 var parseString = require('xml2js').parseString;
 var pg = require('pg');
 
+var conString = process.env.DATABASE_URL
+    || "postgres://nkbzizwzkuiokp:472a016ade0325eebbb97037b2f7ca4ec4285eb65e04bd919f8350c18adb36b2@ec2-54-243-187-133.compute-1.amazonaws.com:5432/dhcjqujfnq6mr?ssl=true";
+
+
 /* GET api listing. */
 router.get('/', (req, res) => {
     res.send('api works');
 });
 
-router.get('/test', (req, res) => {
-    res.send({ test: 'works' });
+router.get('/dbtest', (req, res) => {
+    const data = { city_name: "metrocity", conditions: 'raining' };
+    pg.connect(conString, (err, client, done) => {
+        if (err) {
+            done();
+            console.log(err);
+            return res.status(500).json({ success: false, data: err });
+        }
+        client.query('INSERT INTO city_weather(city_name, conditions) values($1, $2)',
+            [data.city_name, data.conditions]);
+    });
 });
 
-var conString = process.env.DATABASE_URL
-    || "postgres://nkbzizwzkuiokp:472a016ade0325eebbb97037b2f7ca4ec4285eb65e04bd919f8350c18adb36b2@ec2-54-243-187-133.compute-1.amazonaws.com:5432/dhcjqujfnq6mr?ssl=true";
 
 router.get('/Barrie', (req, res) => {
 

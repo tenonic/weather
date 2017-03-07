@@ -1,3 +1,4 @@
+import { DatabaseService } from './services/database.service';
 import { DataService } from './services/data.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -21,7 +22,7 @@ import { UserLocationComponent } from './user-location/user-location.component';
     HttpModule,
     ReactiveFormsModule,
   ],
-  providers: [DataService],
+  providers: [DataService, DatabaseService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
