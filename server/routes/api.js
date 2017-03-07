@@ -14,16 +14,59 @@ router.get('/', (req, res) => {
 });
 
 router.get('/dbtest', (req, res) => {
-    const data = { city_name: "metrocity", conditions: 'raining' };
+    const data = { city_name: "jopa-city", conditions: 'raining' };
     pg.connect(conString, (err, client, done) => {
         if (err) {
             done();
             console.log(err);
             return res.status(500).json({ success: false, data: err });
+        } else {
+            client.query('INSERT INTO city_weather(city_name, conditions) values($1, $2)',
+                [data.city_name, data.conditions]);
+            res.status(200);
+            res.send('inserted');
         }
-        client.query('INSERT INTO city_weather(city_name, conditions) values($1, $2)',
-            [data.city_name, data.conditions]);
     });
+});
+
+router.get('/dbtest/:provinceCode/:cityCode/:cityName', (req, res) => {
+
+
+
+    //todo: need to check if cityName and cityCode
+    request("http://dd.weatheroffice.ec.gc.ca/citypage_weather/xml/ON/" + req.params.cityCode + "_e.xml", function (error, response, body) {
+        var xml = body;
+
+        if (error) {
+
+        } else {
+
+            //todo: take out parsing into helper module
+            parseString(xml, function (err, result) {
+                //console.log(result);
+                //res.send(result.siteData);
+
+                //todo: take out the db actions to a db module
+                pg.connect(conString, (err, client, done) => {
+                    if (err) {
+                        done();
+                        console.log(err);
+                        return res.status(500).json({ success: false, data: err });
+                    } else {
+                        client.query('INSERT INTO city_weather(city_name, city_code, province_code, conditions) values($1, $2, $3, $4)',
+                            [req.params.cityName, req.params.cityCode, req.params.provinceCode, result.siteData]);
+                        res.status(200);
+                        res.send('inserted');
+                    }
+                });
+            });
+        }
+
+
+    });
+
+
+
 });
 
 
